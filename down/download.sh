@@ -12,31 +12,40 @@ echo "\n建议不使用此脚本，如果你想升级组件或者实验，请通
 echo "\n注意1：请按照以下链接手动下载二进制包到down目录中"
 echo "\n注意2：如果还没有手工下载tar包，请Ctrl-c结束此脚本"
 
+echo "\n----download calicoctl binary at:"
+wget https://github.com/projectcalico/calicoctl/releases/download/v1.4.0/calicoctl
+wget  https://github.com/projectcalico/calico-cni/releases/download/v1.4.2/calico
+wget  https://github.com/projectcalico/calico-cni/releases/download/v1.4.2/calico-ipam
+
+chmod +x calicoctl calico calico-ipam
+mv -f calicoctl ../bin/calicoctl
+mv -f calico ../bin/calico
+mv -f calico-ipam ../bin/calico-ipam
+
 echo "\n----download k8s binary at:"
-echo https://dl.k8s.io/${K8S_VER}/kubernetes-server-linux-amd64.tar.gz
+wget https://dl.k8s.io/${K8S_VER}/kubernetes-server-linux-amd64.tar.gz
 
 echo "\n----download etcd binary at:"
-echo https://github.com/coreos/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz
+wget https://github.com/coreos/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz
 echo https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz
 
 echo "\n----download docker binary at:"
-echo https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VER}.tgz
+wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VER}.tgz
 
 echo "\n----download ca tools at:"
-echo https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
-echo https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
-echo https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
 
 echo "\n----download docker-compose at:"
-echo https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-Linux-x86_64
+wget https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-Linux-x86_64
 
 echo "\n----download harbor-offline-installer at:"
-echo https://github.com/vmware/harbor/releases/download/${HARBOR}/harbor-offline-installer-${HARBOR}.tgz
+wget https://github.com/vmware/harbor/releases/download/${HARBOR}/harbor-offline-installer-${HARBOR}.tgz
 
 echo "\n----download cni plugins at:"
-echo https://github.com/containernetworking/plugins/releases
-
-sleep 30
+wget https://github.com/containernetworking/plugins/releases/download/v0.7.0/cni-plugins-amd64-v0.7.0.tgz
+mv cni-plugins-amd64-v0.7.0.tgz cni-${CNI_VER}.tgz 
 
 ### 准备证书工具程序
 echo "\n准备证书工具程序..."
@@ -50,7 +59,7 @@ if [ -f "cfssljson_linux-amd64" ]; then
 else
   echo 请先下载https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
 fi
-if [ -f "cfssl-certinfo_linux-amd64" ]; then
+if [ -f "cfssl-certinfo_linux-amd64" ]; then	
   mv -f cfssl-certinfo_linux-amd64 ../bin/cfssl-certinfo
 else
   echo 请先下载https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
