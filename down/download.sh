@@ -1,9 +1,9 @@
 #!/bin/bash
 #主要组件版本如下
 export K8S_VER=v1.10.2
-export ETCD_VER=v3.3.4
+export ETCD_VER=v3.3.9
 export DOCKER_VER=18.03.0-ce
-export CNI_VER=v0.7.0
+export CNI_VER=v0.7.1
 export DOCKER_COMPOSE=1.18.0
 export HARBOR=v1.2.2
 
@@ -13,12 +13,12 @@ echo "\n注意1：请按照以下链接手动下载二进制包到down目录中"
 echo "\n注意2：如果还没有手工下载tar包，请Ctrl-c结束此脚本"
 
 echo "\n----download calicoctl binary at:"
-wget https://github.com/projectcalico/calicoctl/releases/download/v1.4.0/calicoctl
-wget  https://github.com/projectcalico/calico-cni/releases/download/v1.4.2/calico
-wget  https://github.com/projectcalico/calico-cni/releases/download/v1.4.2/calico-ipam
+wget https://github.com/projectcalico/calicoctl/releases/download/v3.1.3/calicoctl-linux-amd64
+wget  https://github.com/projectcalico/cni-plugin/releases/download/v3.1.3/calico
+wget  https://github.com/projectcalico/cni-plugin/releases/download/v3.1.3/calico-ipam
 
-chmod +x calicoctl calico calico-ipam
-mv -f calicoctl ../bin/calicoctl
+chmod +x calicoctl-linux-amd64 calico calico-ipam
+mv -f calicoctl-linux-amd64 ../bin/calicoctl
 mv -f calico ../bin/calico
 mv -f calico-ipam ../bin/calico-ipam
 
@@ -44,8 +44,8 @@ echo "\n----download harbor-offline-installer at:"
 wget https://github.com/vmware/harbor/releases/download/${HARBOR}/harbor-offline-installer-${HARBOR}.tgz
 
 echo "\n----download cni plugins at:"
-wget https://github.com/containernetworking/plugins/releases/download/v0.7.0/cni-plugins-amd64-v0.7.0.tgz
-mv cni-plugins-amd64-v0.7.0.tgz cni-${CNI_VER}.tgz 
+wget https://github.com/containernetworking/plugins/releases/download/v0.7.1/cni-plugins-amd64-v0.7.1.tgz
+mv cni-plugins-amd64-v0.7.1.tgz cni-${CNI_VER}.tgz 
 
 ### 准备证书工具程序
 echo "\n准备证书工具程序..."
