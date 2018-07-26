@@ -40,7 +40,7 @@ KUBE_APISERVER="https://172.31.0.1:6443"
 BOOTSTRAP_TOKEN="b82fae388f71cf9bec00603c0db29ede"
 
 # 集群网络插件，目前支持calico和flannel
-CLUSTER_NETWORK="flannel"
+CLUSTER_NETWORK="calico"
 
 # 部分calico相关配置，更全配置可以去roles/calico/templates/calico.yaml.j2自定义
 # 设置 CALICO_IPV4POOL_IPIP=“off”,可以提高网络性能，条件限制详见 05.安装calico网络组件.md
